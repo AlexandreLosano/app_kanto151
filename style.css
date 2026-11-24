@@ -124,9 +124,6 @@ kbd {
 .entry-group.amb h3 { color: var(--warn); }
 .entry-group.none h3 { color: var(--bad); }
 .typed { color: var(--muted); font-size: 0.9em; }
-.choices { display: inline-flex; gap: 6px; flex-wrap: wrap; }
-.choice { padding: 2px 10px; font-size: 0.9em; }
-.resolved { color: var(--ok); }
 .entry-stats { margin: 10px 0 0; font-size: 0.85rem; color: var(--muted); }
 .dex { font-family: var(--mono); font-size: 0.85em; color: var(--muted); }
 

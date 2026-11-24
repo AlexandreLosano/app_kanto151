@@ -134,7 +134,7 @@ function renderEntry(entry) {
     new: { title: 'Novos registros', items: [] },
     hint: { title: 'Acertou a dica', items: [] },
     dup: { title: 'Já estavam registrados', items: [] },
-    amb: { title: 'Qual você quis dizer?', items: [] },
+    amb: { title: 'Não deu para ter certeza', items: [] },
     none: { title: 'Não consegui identificar', items: [] },
   };
   for (const row of entry.rows) groups[row.type].items.push(row);
@@ -149,20 +149,11 @@ function renderEntry(entry) {
       if (type === 'none') {
         li.textContent = `Não consegui identificar: ${row.input}`;
       } else if (type === 'amb') {
-        li.appendChild(el('span', 'typed', `"${row.input}": `));
-        const btns = el('span', 'choices');
-        for (const id of row.ids) {
-          const b = el('button', 'choice', `${dexNum(id)} ${pokeName(id)}`);
-          b.type = 'button';
-          b.addEventListener('click', () => {
-            const res = register(id);
-            btns.replaceWith(el('span', 'resolved',
-              res === 'dup' ? `${pokeName(id)} já estava registrado` : `registrado ${dexNum(id)} ${pokeName(id)}`));
-            renderAll();
-          });
-          btns.appendChild(b);
-        }
-        li.appendChild(btns);
+        // Não lista os candidatos: mostrar nomes seria entregar Pokémon que a pessoa ainda não lembrou.
+        const isNidoran = row.ids.length === 2 && row.ids.includes(29) && row.ids.includes(32);
+        li.textContent = isNidoran
+          ? `"${row.input}": escreva "nidoran fêmea" ou "nidoran macho".`
+          : `"${row.input}" ficou parecido com mais de um Pokémon. Tente escrever de outro jeito.`;
       } else {
         li.appendChild(el('span', 'dex', dexNum(row.id)));
         li.appendChild(el('strong', null, ' ' + pokeName(row.id)));
