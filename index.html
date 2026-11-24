@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kanto 151</title>
+  <meta name="description" content="Desafio de memória: lembre os 151 Pokémon de Kanto sem consultar listas.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Kanto 151</h1>
+    <p>Lembre os 151 Pokémon da primeira geração, de cabeça. Pode escrever errado: o app tenta entender.</p>
+    <div class="progress" aria-hidden="true"><div id="progress-bar"></div></div>
+  </header>
+
+  <main class="layout">
+    <section class="play" aria-label="Jogar">
+      <form id="entry-form" class="entry-form">
+        <label for="entry" class="sr-only">Nomes de Pokémon</label>
+        <textarea id="entry" rows="2" autocomplete="off" autocapitalize="off" spellcheck="false"
+          placeholder="pikachu, bulbassauro, charizardi…"></textarea>
+        <button type="submit" class="primary">Enviar</button>
+      </form>
+      <p class="help">Separe por vírgula, espaço ou linha. <kbd>Enter</kbd> envia, <kbd>Shift</kbd>+<kbd>Enter</kbd> quebra linha. Digite <em>dica</em> ou use o botão.</p>
+
+      <div class="hint-bar">
+        <button type="button" id="btn-hint">Pedir dica</button>
+        <button type="button" id="btn-swap" hidden>Trocar Pokémon</button>
+      </div>
+      <div id="hint-box" class="hint-box" hidden></div>
+
+      <div id="feed" class="feed" aria-live="polite"></div>
+    </section>
+
+    <aside class="side" aria-label="Progresso">
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-label">Lembrados</span>
+          <span class="stat-value"><span id="stat-total">0</span><small>/151</small></span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Com linha evolutiva</span>
+          <span class="stat-value" id="stat-line">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Sem linha evolutiva</span>
+          <span class="stat-value" id="stat-solo">0</span>
+        </div>
+      </div>
+      <p class="stat-check">conferência: <span id="stat-check"></span> · linhas evolutivas só da 1ª geração</p>
+
+      <h2>Registrados <span class="legend">em roxo: sem linha evolutiva</span></h2>
+      <p id="list-empty" class="muted">Nenhum ainda.</p>
+      <ol id="found-list" class="found-list"></ol>
+
+      <div class="side-actions">
+        <button type="button" id="btn-missing">Ver faltantes</button>
+        <button type="button" id="btn-reset" class="danger">Recomeçar</button>
+      </div>
+      <div id="missing" class="missing" hidden></div>
+    </aside>
+  </main>
+
+  <footer class="foot">
+    Dados fixos da 1ª geração · imagens da <a href="https://pokeapi.co/" target="_blank" rel="noopener">PokéAPI</a> · Pokémon é marca da Nintendo/Game Freak/The Pokémon Company.
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/matcher.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
